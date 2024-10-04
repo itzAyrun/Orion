@@ -1,0 +1,6 @@
+[bot]
+prefix = "?"
+
+[commands]
+case_insensitive = true
+strip_after_prefix = true
