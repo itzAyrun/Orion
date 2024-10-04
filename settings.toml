@@ -1,5 +1,5 @@
 [bot]
-prefix = "?"
+prefix = ["?"]
 
 [commands]
 case_insensitive = true
