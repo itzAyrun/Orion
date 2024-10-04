@@ -1,15 +1,15 @@
 import os
+from typing import List
 
 import discord
 from discord.ext import commands
 
 from config import settings
 
-
 class Orion(commands.Bot):
     def __init__(self) -> None:
         super().__init__(
-            command_prefix=settings.bot.prefix,
+            command_prefix=self._prefix_callable,
             intents=discord.Intents.all(),
             help_command=None,
             strip_after_prefix=settings.commands.strip_after_prefix,
@@ -31,3 +31,11 @@ class Orion(commands.Bot):
 
     async def on_ready(self) -> None:
         print(f"Logged in as {self.user}")
+    
+    @staticmethod
+    async def _prefix_callable(*_) -> List[str]:
+        settings.reload()
+        if settings.bot.prefix is None:
+            return ["?"]
+
+        return settings.bot.prefix
